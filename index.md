@@ -1,5 +1,5 @@
 ---
-title       : hello
+title       : hello world
 subtitle    : 
 author      : James Elvy
 job         : 
