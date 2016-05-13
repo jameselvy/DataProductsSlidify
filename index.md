@@ -1,6 +1,6 @@
 ---
 title       : Mixed-mode distributions
-subtitle    : Decompositional analysis of mixed-mode distributions using R 'mixtools' package
+subtitle    : Analysis of mixed-mode distributions using R 'mixtools' package
 author      : James Elvy
 job         : Coursera Datascience Specialisation
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
