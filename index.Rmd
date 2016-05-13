@@ -1,8 +1,8 @@
 ---
-title       : hello world
-subtitle    : 
+title       : Mixed-mode distributions
+subtitle    : Decompositional analysis of mixed-mode distributions using R 'mixtools' package
 author      : James Elvy
-job         : 
+job         : Coursera Datascience Specialisation
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
@@ -20,8 +20,53 @@ knit        : slidify::knit2slides
 --- .class #id 
 
 ## Slide 2
-```{r, echo=TRUE, results='hide'}
-1+1
+```{r, echo=FALSE, results='asis'}
+# http://www.r-bloggers.com/visually-weighted-regression-in-r-a-la-solomon-hsiang/
+# http://rstudio-pubs-static.s3.amazonaws.com/1001_3177e85f5e4840be840c84452780db52.html# mixtools
+library(mixtools)    # install.packages("mixtools")
+
+# http://stackoverflow.com/questions/25313578/any-suggestions-for-how-i-can-plot-mixem-type-data-using-ggplot2
+proportions <- c(5000, 5000, 500)
+means <- c(1.5, 3, 8)
+sds <- c(1.5, 2, 4)
+
+a <- data.frame(matrix(rnorm(1000000, mean=means[1], sd=sds[1])))
+b <- data.frame(matrix(rnorm(1000000, mean=means[2], sd=sds[2])))
+c <- data.frame(matrix(rnorm(1000000, mean=means[3], sd=sds[3])))
+
+# build up mix sample
+mix <- c(a[sample(nrow(a), proportions[1]), ], b[sample(nrow(b), proportions[2]), ], c[sample(nrow(c), proportions[3]), ])
+hist(mix)
+
+
+
+#line below returns EM output of type mixEM[] for mixture of normal distributions
+mixModel <- normalmixEM(mix, lambda=NULL, mu=NULL, sigma=NULL, k=3)   # k=3 as we expect three populations are sampled
+plot(mixModel, which = 2)
+summary(mixModel)
+
+# compare actual proportions with 'mixmode' model prediction
+# round((proportions / sum(proportions)) * 100, 0)
+# round(mixModel$lambda * 100, 0)
+# 
+# # compare actual means with 'mixmode' model prediction
+# means
+# round(mixModel$mu, 2)
+# 
+# # compare actual stDevs with 'mixmode' model prediction
+# sds
+# round(mixModel$sigma, 2)
+
+# make dataframe of comparisons
+comparisonTable <- data.frame(round((proportions / sum(proportions)) * 100, 0), means, sds, round(mixModel$lambda * 100, 0), round(mixModel$mu, 2), round(mixModel$sigma, 2), row.names = c("Sample1", "Sample2", "Sample3")) 
+names(comparisonTable) <- c("percent", "mean", "sd", "mix.percent", "mix.mean", "mix.sd")
+comparisonTable
+
+
+# http://dsp.stackexchange.com/questions/26358/how-to-detect-whether-a-signal-is-unimodal-or-bimodal
+library(diptest)   # install.packages("diptest")
+dip.test(mixMode)
+
 ```
 
 
