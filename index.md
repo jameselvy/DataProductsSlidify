@@ -40,7 +40,7 @@ A tri-modal distribution was synthesised from 10,000 data points randomly sample
 The input parameters of the component distributions are:
 
 ```r
-comp.proportions <- c(5000, 4000, 500)
+comp.proportions <- c(5000, 4000, 1000)
 comp.means <- c(1.5, 3, 8)
 comp.stdevs <- c(1.5, 2, 4)
 ```

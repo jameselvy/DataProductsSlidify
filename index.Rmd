@@ -70,7 +70,7 @@ plot(mixModel, which = 2, main2 = "Decomposition of tri-modal distribution using
 ## Results
 The input parameters of the component distributions are:
 ```{r, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
-comp.proportions <- c(5000, 4000, 500)
+comp.proportions <- c(5000, 4000, 1000)
 comp.means <- c(1.5, 3, 8)
 comp.stdevs <- c(1.5, 2, 4)
 ```
