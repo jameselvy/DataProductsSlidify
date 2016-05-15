@@ -33,7 +33,7 @@
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
     <h1>Mixed-mode distributions</h1>
-    <h2>Analysis of mixed-mode distributions using R 'mixtools' package</h2>
+    <h2>Analysis of multi-mode distributions using R 'mixtools' package</h2>
     <p>James Elvy<br/>Coursera Datascience Specialisation</p>
   </hgroup>
   <article></article>  
@@ -43,13 +43,14 @@
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
   <hgroup>
-    <h2>Read-And-Delete</h2>
+    <h2>What are multi-mode distributions?</h2>
   </hgroup>
   <article data-timings="">
     <ol>
-<li>Edit YAML front matter</li>
-<li>Write using R Markdown</li>
-<li>Use an empty line followed by three dashes to separate slides!</li>
+<li> Multi-mode distributions the have more than one ‘mode’.<br></li>
+<li> They are typically composed of several component distributions, each with their own mean and standard deviation.</li>
+<li> The resulting ‘shape’ of the distribution depends on the relative proportions (number of points) of each of the component distributions</li>
+<li> They are common in &#39;natural populations&#39; but problematic to deal with</li>
 </ol>
 
   </article>
@@ -58,24 +59,59 @@
 
 <slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Slide 2</h2>
+    <h2>The R ‘mixtools’ package:</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="assets/fig/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1">WARNING! NOT CONVERGENT! 
-number of iterations= 1000 
-<img src="assets/fig/unnamed-chunk-1-2.png" alt="plot of chunk unnamed-chunk-1">summary of normalmixEM object:
-        comp 1   comp 2    comp 3
-lambda 0.35884 0.595121 0.0460392
-mu     3.39354 1.550057 7.6441309
-sigma  2.00002 1.526222 4.1583473
-loglik at estimate:  -22998.35 
-        percent mean  sd mix.percent mix.mean mix.sd
-Sample1      48  1.5 1.5          36     3.39   2.00
-Sample2      48  3.0 2.0          60     1.55   1.53
-Sample3       5  8.0 4.0           5     7.64   4.16</p>
+    <ol>
+<li> The mixtools package takes an input distribution as an argument</li>
+<li> The ‘normalmixEM’ function can be used to decompose a distribution to ‘normal distribution’ components.</li>
+<li> You can specify the number of modes you want to investigate</li>
+<li> You can specify the number of iterations</li>
+<li> It works best with larger datasets</li>
+</ol>
 
-<pre><code>## Error in sort(x[complete.cases(x)]): object &#39;mixMode&#39; not found
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Analysis example:</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>A tri-modal distribution was synthesised from 10,000 data points randomly sampled from three normally distributed populations in the following component proportions 50%, 40% and 10%).</p>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Results</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The input parameters of the component distributions are:</p>
+
+<pre><code class="r">comp.proportions &lt;- c(5000, 4000, 500)
+comp.means &lt;- c(1.5, 3, 8)
+comp.stdevs &lt;- c(1.5, 2, 4)
 </code></pre>
+
+<p>The output of the ‘normalmixEM” function is:</p>
+
+<pre><code>## summary of normalmixEM object:
+##          comp 1   comp 2     comp 3
+## lambda 0.698029 0.280438  0.0215324
+## mu     1.516243 3.500708 11.1238884
+## sigma  1.523845 1.926194  1.8987278
+## loglik at estimate:  -2026.697
+</code></pre>
+
+<p>Interactive shiny app here: <a href="https://jameselvy.shinyapps.io/CourseraDataProductsShiny/">https://jameselvy.shinyapps.io/CourseraDataProductsShiny/</a></p>
+
+<p>Source code: <a href="https://jameselvy.github.com/DataProductsSlidify">https://jameselvy.github.com/DataProductsSlidify</a></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -87,14 +123,26 @@ Sample3       5  8.0 4.0           5     7.64   4.16</p>
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='Read-And-Delete'>
+        data-slide=1 title='What are multi-mode distributions?'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Slide 2'>
+        data-slide=2 title='The R ‘mixtools’ package:'>
          2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Analysis example:'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Results'>
+         4
       </a>
     </li>
   </ul>
