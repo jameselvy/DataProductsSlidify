@@ -56,4 +56,4 @@ The output of the ‘normalmixEM” function is:
 ```
 Interactive shiny app here: https://jameselvy.shinyapps.io/CourseraDataProductsShiny/
 
-Source code: https://jameselvy.github.com/DataProductsSlidify
+Source code: https://github.com/jameselvy/DataProductsShiny
